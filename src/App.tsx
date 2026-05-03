@@ -20,6 +20,8 @@ import {
 } from './data/siteData'
 
 const navItems = ['Home', 'About', 'Services', 'Projects', 'Experience', 'Contact']
+const contactEndpoint =
+  'https://script.google.com/macros/s/AKfycbxJMo6dLZyesX1-j8Yn8gLMe6tI69Z2R61zEXqLlZTcmv27V_uJaO4NKjtLZwVaE7xPqw/exec'
 
 function SectionHeading({
   eyebrow,
@@ -310,13 +312,45 @@ function Resume() {
 
 function ContactForm() {
   const [submitted, setSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState('')
 
   return (
     <form
       className="contact-form"
-      onSubmit={(event) => {
+      onSubmit={async (event) => {
         event.preventDefault()
-        setSubmitted(true)
+        setSubmitted(false)
+        setError('')
+        setIsSubmitting(true)
+
+        const form = event.currentTarget
+        const formData = new FormData(form)
+        const payload = {
+          name: String(formData.get('name') || ''),
+          email: String(formData.get('email') || ''),
+          projectName: String(formData.get('projectName') || ''),
+          need: String(formData.get('need') || ''),
+          details: String(formData.get('details') || ''),
+          link: String(formData.get('link') || ''),
+        }
+
+        try {
+          await fetch(contactEndpoint, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+              'Content-Type': 'text/plain;charset=utf-8',
+            },
+            body: JSON.stringify(payload),
+          })
+          form.reset()
+          setSubmitted(true)
+        } catch {
+          setError('Something went wrong. Please try again or reach out through LinkedIn.')
+        } finally {
+          setIsSubmitting(false)
+        }
       }}
     >
       <div className="form-grid">
@@ -353,13 +387,17 @@ function ContactForm() {
         Website or social link
         <input name="link" type="url" placeholder="https://" />
       </label>
-      <button className="button button-dark submit-button" type="submit">Request a Quote</button>
-      <p className="backend-note">
-        Built to connect later with Google Sheets, Formspree, Netlify Forms, Supabase, or Airtable.
-      </p>
+      <button className="button button-dark submit-button" type="submit" disabled={isSubmitting}>
+        {isSubmitting ? 'Sending...' : 'Request a Quote'}
+      </button>
       {submitted ? (
         <div className="confirmation" role="status">
           Thanks - your request has been received. I&apos;ll review the details and follow up.
+        </div>
+      ) : null}
+      {error ? (
+        <div className="form-error" role="alert">
+          {error}
         </div>
       ) : null}
     </form>

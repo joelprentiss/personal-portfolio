@@ -633,12 +633,13 @@ button:focus-visible {
   width: 100%;
 }
 
-.backend-note {
-  font-size: 0.84rem;
-  margin: 14px 0 0;
+.submit-button:disabled {
+  cursor: wait;
+  opacity: 0.72;
 }
 
-.confirmation {
+.confirmation,
+.form-error {
   background: rgba(31, 107, 90, 0.11);
   border: 1px solid rgba(31, 107, 90, 0.24);
   border-radius: 8px;
@@ -646,6 +647,12 @@ button:focus-visible {
   font-weight: 800;
   margin-top: 18px;
   padding: 14px;
+}
+
+.form-error {
+  background: rgba(154, 52, 18, 0.1);
+  border-color: rgba(154, 52, 18, 0.24);
+  color: #7c2d12;
 }
 
 .footer {
