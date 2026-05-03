@@ -99,11 +99,8 @@ function Hero() {
         </div>
       </div>
       <div className="hero-visual reveal delay">
-        <div className="portrait-card" aria-label="Professional photo placeholder">
-          <div className="photo-placeholder">
-            <span>Photo</span>
-            <strong>Replace with Joel&apos;s portrait</strong>
-          </div>
+        <div className="portrait-card" aria-label="Professional photo of Joel Prentiss">
+          <img className="profile-photo" src="/joel-profile.png" alt="Joel Prentiss smiling in a suit" />
           <div className="ops-panel">
             <p>Operator&apos;s Lens</p>
             <div>
@@ -202,6 +199,7 @@ function ProjectCard({ project }: { project: (typeof projects)[number] }) {
   return (
     <article className="project-card">
       <div className="project-image">
+        <img src={project.previewImage} alt={`${project.title} preview`} loading="lazy" />
         <span>{project.category}</span>
       </div>
       <div className="project-body">
@@ -214,8 +212,11 @@ function ProjectCard({ project }: { project: (typeof projects)[number] }) {
           ))}
         </div>
         <div className="project-actions">
-          <a href={project.liveUrl}>Live Preview <ExternalLink size={15} /></a>
-          <a href={project.githubUrl}>GitHub <ExternalLink size={15} /></a>
+          {project.actions.map((action) => (
+            <a key={action.label} href={action.url} target="_blank" rel="noreferrer">
+              {action.label} <ExternalLink size={15} />
+            </a>
+          ))}
         </div>
       </div>
     </article>
@@ -296,7 +297,7 @@ function Resume() {
         <p>For a more traditional view of my work history, education, and certifications, download my resume below.</p>
       </div>
       <div className="resume-actions">
-        <a className="button button-dark" href={links.resume}>
+        <a className="button button-dark" href={links.resume} download>
           <Download size={18} /> Download Resume
         </a>
         <a className="button button-light" href={links.linkedin}>
@@ -391,6 +392,7 @@ function Footer() {
       <div className="footer-links">
         <a href={links.github}>GitHub</a>
         <a href={links.linkedin}>LinkedIn</a>
+        <a href={links.instagram}>Instagram</a>
         <a href={links.tiktok}>TikTok / thegijoel</a>
         <a href={links.youtube}>YouTube</a>
         <a href="#contact">Email</a>

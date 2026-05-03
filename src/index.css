@@ -260,64 +260,14 @@ p {
   padding: 18px;
 }
 
-.photo-placeholder {
-  align-items: flex-end;
+.profile-photo {
   aspect-ratio: 4 / 5;
-  background:
-    linear-gradient(145deg, rgba(28, 55, 77, 0.9), rgba(28, 91, 94, 0.65)),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.14) 1px, transparent 1px);
-  background-size: auto, 28px 28px;
   border-radius: 8px;
-  display: flex;
-  justify-content: space-between;
-  overflow: hidden;
-  padding: 22px;
-  position: relative;
-}
-
-.photo-placeholder::before {
-  background: rgba(247, 245, 239, 0.92);
-  border-radius: 8px 8px 0 0;
-  bottom: 0;
-  content: "";
-  height: 54%;
-  left: 22%;
-  position: absolute;
-  width: 56%;
-}
-
-.photo-placeholder::after {
-  background: #101820;
-  border: 6px solid #e7d3a5;
-  border-radius: 999px;
-  content: "";
-  height: 96px;
-  left: 50%;
-  position: absolute;
-  top: 25%;
-  transform: translateX(-50%);
-  width: 96px;
-}
-
-.photo-placeholder span,
-.photo-placeholder strong {
-  position: relative;
-  z-index: 2;
-}
-
-.photo-placeholder span {
-  background: rgba(255, 255, 255, 0.85);
-  border-radius: 999px;
-  color: #13251f;
-  font-size: 0.78rem;
-  font-weight: 850;
-  padding: 7px 10px;
-}
-
-.photo-placeholder strong {
-  color: #fff;
-  max-width: 140px;
-  text-align: right;
+  display: block;
+  height: auto;
+  object-fit: cover;
+  object-position: center top;
+  width: 100%;
 }
 
 .ops-panel {
@@ -489,7 +439,26 @@ p {
     linear-gradient(135deg, rgba(19, 37, 31, 0.95), rgba(37, 60, 80, 0.82)),
     repeating-linear-gradient(90deg, transparent 0 38px, rgba(255, 255, 255, 0.1) 38px 39px);
   display: flex;
+  overflow: hidden;
   padding: 18px;
+  position: relative;
+}
+
+.project-image::after {
+  background: linear-gradient(180deg, transparent 40%, rgba(16, 24, 32, 0.5));
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.project-image img {
+  height: 100%;
+  inset: 0;
+  object-fit: cover;
+  object-position: top center;
+  position: absolute;
+  width: 100%;
 }
 
 .project-image span {
@@ -499,6 +468,8 @@ p {
   font-size: 0.78rem;
   font-weight: 850;
   padding: 8px 11px;
+  position: relative;
+  z-index: 1;
 }
 
 .project-body {

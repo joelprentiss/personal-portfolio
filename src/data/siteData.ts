@@ -1,8 +1,9 @@
 export const links = {
-  github: 'https://github.com/YOURUSERNAME',
-  linkedin: 'https://linkedin.com/in/YOURUSERNAME',
+  github: 'https://github.com/joelprentiss',
+  linkedin: 'https://www.linkedin.com/in/joel-prentiss/',
+  instagram: 'https://www.instagram.com/thegijoel/',
   tiktok: 'https://tiktok.com/@thegijoel',
-  youtube: 'https://youtube.com/@thegijoel',
+  youtube: 'https://www.youtube.com/c/TheGIJoel',
   resume: '/Joel-Prentiss-Resume.pdf',
 }
 
@@ -83,38 +84,78 @@ export const projects = [
   {
     title: 'Local Contractor Website',
     category: 'Website Build',
+    previewImage: '/project-previews/local-contractor-website.png',
     description:
       'A clean service-business website concept designed to help a local contractor explain services, build trust, and capture leads.',
     tools: ['React', 'Tailwind', 'GitHub', 'Cloudflare Pages'],
-    liveUrl: '#',
-    githubUrl: '#',
+    actions: [
+      {
+        label: 'Live Preview',
+        url: 'https://rbk-contractors.joel-prentiss89.workers.dev/',
+      },
+      {
+        label: 'GitHub',
+        url: 'https://github.com/joelprentiss/RBK_Contractors.git',
+      },
+    ],
   },
   {
     title: 'Ironclad Ops Landing Page',
     category: 'Business Systems / Lead Generation',
+    previewImage: '/project-previews/ironclad-ops-landing.png',
     description:
       'A validation landing page concept for a practical operations consulting offer focused on small service businesses.',
     tools: ['React', 'Tailwind', 'Google Sheets integration', 'Lead capture form'],
-    liveUrl: '#',
-    githubUrl: '#',
+    actions: [
+      {
+        label: 'Live Preview',
+        url: 'https://ironcladops.joel-prentiss89.workers.dev/',
+      },
+      {
+        label: 'GitHub',
+        url: 'https://github.com/joelprentiss/ironcladops.git',
+      },
+    ],
   },
   {
     title: 'AI Business Assistant Demo',
     category: 'App / AI Tool',
+    previewImage: '/project-previews/ai-business-assistant.png',
     description:
       'A demo app concept that uses AI-assisted workflows to help small businesses generate operational, sales, marketing, and growth recommendations.',
     tools: ['Next.js', 'OpenAI API', 'TypeScript', 'Tailwind'],
-    liveUrl: '#',
-    githubUrl: '#',
+    actions: [
+      {
+        label: 'Live Preview',
+        url: 'https://ironclad-ops-ai.joel-prentiss89.workers.dev/',
+      },
+      {
+        label: 'GitHub',
+        url: 'https://github.com/joelprentiss/ironclad-ops-ai',
+      },
+    ],
   },
   {
     title: 'Personal Creator Brand: thegijoel',
     category: 'Content Creation',
+    previewImage: '/project-previews/thegijoel-creator-brand.png',
     description:
       'A content brand focused on character analysis, psychology, storytelling, and reflective cultural commentary.',
     tools: ['TikTok', 'YouTube', 'Scriptwriting', 'Short-form video'],
-    liveUrl: '#',
-    githubUrl: '#',
+    actions: [
+      {
+        label: 'Instagram',
+        url: 'https://www.instagram.com/thegijoel/',
+      },
+      {
+        label: 'TikTok',
+        url: 'https://www.tiktok.com/@thegijoel',
+      },
+      {
+        label: 'YouTube',
+        url: 'https://www.youtube.com/c/TheGIJoel',
+      },
+    ],
   },
 ]
 
