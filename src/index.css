@@ -215,6 +215,10 @@ p {
   padding-top: 48px;
 }
 
+.hero-copy {
+  min-width: 0;
+}
+
 .hero-subhead {
   font-size: clamp(1.08rem, 2vw, 1.34rem);
   max-width: 760px;
@@ -790,16 +794,18 @@ button:focus-visible {
 
 @media (max-width: 680px) {
   .section {
-    padding: 64px 18px;
+    padding: 64px 16px;
   }
 
   .band {
-    padding-inline: 18px;
+    padding-inline: 16px;
   }
 
   h1 {
-    font-size: 2.22rem;
+    font-size: clamp(2rem, 10vw, 2.22rem);
     line-height: 1.02;
+    max-width: 100%;
+    overflow-wrap: anywhere;
   }
 
   .hero {
@@ -809,23 +815,36 @@ button:focus-visible {
 
   .hero-subhead {
     font-size: 1rem;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .hero-actions .button {
+    width: 100%;
   }
 
   .credibility-row {
-    flex-wrap: nowrap;
-    margin-inline: -18px;
-    overflow-x: auto;
-    padding: 0 18px 6px;
+    flex-wrap: wrap;
+    margin-top: 26px;
+    overflow: visible;
+    padding: 0;
   }
 
   .credibility-row span {
-    flex: 0 0 auto;
+    flex: 1 1 100%;
+    text-align: center;
   }
 
   .hero-visual {
     display: block;
     margin: 2px auto 0;
-    max-width: 320px;
+    max-width: min(100%, 320px);
     width: 100%;
   }
 
