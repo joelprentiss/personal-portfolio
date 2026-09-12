@@ -4,119 +4,50 @@ export const links = {
   instagram: 'https://www.instagram.com/thegijoel/',
   tiktok: 'https://tiktok.com/@thegijoel',
   youtube: 'https://www.youtube.com/c/TheGIJoel',
-  resume: '/Joel-Prentiss-Resume.pdf',
+  mediaKit: '/GI-Joel-Media-Kit.png',
 }
 
 export const whatIBring = [
   'Operations discipline',
   'Practical problem-solving',
   'Process improvement mindset',
-  'AI-assisted development',
-  'Content and audience-building experience',
+  'Applied AI and app building',
+  'Creator and audience experience',
   'Front-line leadership experience',
 ]
 
 export const services = [
   {
-    kicker: 'Web',
-    title: 'Web Development',
-    description:
-      'Clean, modern websites for small businesses, personal brands, creators, and service providers. Built to be clear, mobile-friendly, and easy for customers to understand.',
-    bullets: [
-      'Landing pages',
-      'Personal brand sites',
-      'Portfolio websites',
-      'Local business websites',
-      'Shopify, Square, or simple commerce setup',
-      'Contact forms and lead capture',
-      'Basic SEO structure',
-    ],
-    cta: 'Request a Website Quote',
+    kicker: 'Applied AI',
+    title: 'AI that improves the work.',
+    description: 'I connect AI tools to real operational needs, turning repetitive work and scattered information into practical workflows.',
+    bullets: ['AI workflow design', 'Prompt development and iteration', 'Knowledge and process documentation', 'Human review and quality checks'],
+    cta: 'Talk AI & Operations',
   },
   {
-    kicker: 'Ops',
-    title: 'Process Improvement',
-    description:
-      'Operational support for businesses that need cleaner workflows, better handoffs, and more consistent execution.',
-    bullets: [
-      'SOP creation',
-      'Workflow mapping',
-      'Root cause analysis',
-      'Process documentation',
-      'Team handoff systems',
-      'Quality and consistency improvements',
-    ],
+    kicker: 'App Building',
+    title: 'Ideas into useful apps.',
+    description: 'I use AI-assisted development to turn an idea into a working tool, with attention to the problem, the experience, and how people will use it.',
+    bullets: ['App concepts and prototypes', 'AI assistant experiences', 'Workflow tools', 'Testing and iteration'],
+    cta: 'Explore an App Idea',
+  },
+  {
+    kicker: 'Creator Experience',
+    title: 'Better content. A clear voice.',
+    description: 'Hands-on experience as GI Joel informs how I use AI for research, ideation, and content refinement while keeping storytelling and personal voice at the center.',
+    bullets: ['Content research and ideation', 'Hooks and script development', 'Short-form and long-form storytelling', 'Repurposing content across social platforms'],
+    cta: 'Talk Content',
+  },
+  {
+    kicker: 'Operations',
+    title: 'Make execution easier.',
+    description: 'Manufacturing leadership and an operations background shape my approach to clearer processes, stronger handoffs, and consistent execution.',
+    bullets: ['Workflow mapping and SOPs', 'Root cause analysis', 'Process improvement', 'Team training and handoffs'],
     cta: 'Improve a Process',
-  },
-  {
-    kicker: 'Social',
-    title: 'Social Media Marketing',
-    description:
-      'Simple, practical content systems for small businesses and personal brands that need to become more visible online.',
-    bullets: [
-      'Content strategy',
-      'Short-form video ideas',
-      'Local business content plans',
-      'Offer positioning',
-      'Social media profile cleanup',
-      'Simple posting systems',
-    ],
-    cta: 'Build a Content System',
-  },
-  {
-    kicker: 'Content',
-    title: 'Content Creation',
-    description:
-      'Content built around storytelling, psychology, business clarity, and audience connection. This includes experience growing and creating under the personal creator brand thegijoel.',
-    bullets: [
-      'Short-form video scripts',
-      'YouTube concepts',
-      'Brand storytelling',
-      'Voiceover scripts',
-      'Educational content',
-      'Content repurposing',
-    ],
-    cta: 'Plan Content',
   },
 ]
 
 export const projects = [
-  {
-    title: 'Local Contractor Website',
-    category: 'Website Build',
-    previewImage: '/project-previews/local-contractor-website.png',
-    description:
-      'A clean service-business website concept designed to help a local contractor explain services, build trust, and capture leads.',
-    tools: ['React', 'Tailwind', 'GitHub', 'Cloudflare Pages'],
-    actions: [
-      {
-        label: 'Live Preview',
-        url: 'https://rbk-contractors.joel-prentiss89.workers.dev/',
-      },
-      {
-        label: 'GitHub',
-        url: 'https://github.com/joelprentiss/RBK_Contractors.git',
-      },
-    ],
-  },
-  {
-    title: 'Ironclad Ops Landing Page',
-    category: 'Business Systems / Lead Generation',
-    previewImage: '/project-previews/ironclad-ops-landing.png',
-    description:
-      'A validation landing page concept for a practical operations consulting offer focused on small service businesses.',
-    tools: ['React', 'Tailwind', 'Google Sheets integration', 'Lead capture form'],
-    actions: [
-      {
-        label: 'Live Preview',
-        url: 'https://ironcladops.joel-prentiss89.workers.dev/',
-      },
-      {
-        label: 'GitHub',
-        url: 'https://github.com/joelprentiss/ironcladops.git',
-      },
-    ],
-  },
   {
     title: 'AI Business Assistant Demo',
     category: 'App / AI Tool',
@@ -136,11 +67,11 @@ export const projects = [
     ],
   },
   {
-    title: 'Personal Creator Brand: thegijoel',
+    title: 'Personal Brand: GI Joel',
     category: 'Content Creation',
-    previewImage: '/project-previews/thegijoel-creator-brand.png',
+    previewImage: '/project-previews/gi-joel-youtube-banner.png',
     description:
-      'A content brand focused on character analysis, psychology, storytelling, and reflective cultural commentary.',
+      'My creator brand explores character psychology, mythology, and the meaning in stories. It is also where I bring together content strategy, AI-assisted creative workflows, and a distinct personal voice.',
     tools: ['TikTok', 'YouTube', 'Scriptwriting', 'Short-form video'],
     actions: [
       {
@@ -156,6 +87,14 @@ export const projects = [
         url: 'https://www.youtube.com/c/TheGIJoel',
       },
     ],
+  },
+  {
+    title: 'Face Your Dragon',
+    category: 'App / In Development',
+    previewImage: '/project-previews/face-your-dragon.webp',
+    description: 'An app designed to help people identify blind spots and improve their lives through guided reflection. Character archetypes, daily prompts, and journaling bring that experience to life. Currently in development.',
+    tools: ['Reflection', 'Journaling', 'AI-assisted development'],
+    actions: [],
   },
 ]
 

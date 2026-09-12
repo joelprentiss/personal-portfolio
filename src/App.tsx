@@ -51,10 +51,10 @@ function Navbar() {
           <span>JP</span>
           <strong>Joel Prentiss</strong>
         </a>
-        <button className="menu-button" type="button" onClick={() => setOpen(!open)} aria-label="Toggle menu">
+        <button className="menu-button" type="button" onClick={() => setOpen(!open)} aria-label="Toggle menu" aria-expanded={open} aria-controls="primary-links">
           <Menu size={20} />
         </button>
-        <div className={`nav-links ${open ? 'is-open' : ''}`}>
+        <div id="primary-links" className={`nav-links ${open ? 'is-open' : ''}`}>
           {navItems.map((item) => (
             <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setOpen(false)}>
               {item}
@@ -63,7 +63,7 @@ function Navbar() {
         </div>
         <div className="nav-actions">
           <a className="text-link" href="#projects">View Projects</a>
-          <a className="button button-dark" href="#contact">Request a Quote</a>
+          <a className="button button-dark" href="#contact">Let’s Connect</a>
         </div>
       </nav>
     </header>
@@ -82,17 +82,17 @@ function Hero() {
   return (
     <section className="hero section" id="home">
       <div className="hero-copy reveal">
-        <p className="eyebrow">Websites. Systems. Content. Execution.</p>
-        <h1>I build websites, systems, and content for businesses that need cleaner execution.</h1>
+        <p className="eyebrow">Applied AI. Apps. Content. Operations.</p>
+        <h1>I use AI to improve operations and create better content.</h1>
         <p className="hero-subhead">
-          I&apos;m Joel Prentiss, a Tesla operations leader, Navy veteran, MBA graduate, and digital builder
-          helping small businesses improve their online presence, processes, and customer experience.
+          I&apos;m Joel Prentiss: operations leader, app builder, and the creator behind GI Joel.
+          I combine hands-on AI knowledge with real-world experience to build useful tools, improve workflows, and tell stronger stories.
         </p>
         <div className="hero-actions">
           <a className="button button-dark" href="#projects">
             View My Work <ArrowRight size={18} />
           </a>
-          <a className="button button-light" href="#contact">Request a Quote</a>
+          <a className="button button-light" href="#contact">Let’s Connect</a>
         </div>
         <div className="credibility-row" aria-label="Credibility highlights">
           {proof.map((item) => (
@@ -104,14 +104,14 @@ function Hero() {
         <div className="portrait-card" aria-label="Professional photo of Joel Prentiss">
           <img className="profile-photo" src="/joel-profile.png" alt="Joel Prentiss smiling in a suit" />
           <div className="ops-panel">
-            <p>Operator&apos;s Lens</p>
+            <p>Creator + Operator</p>
             <div>
-              <span>Offer clarity</span>
-              <strong>Website + process + content</strong>
+              <span>My focus</span>
+              <strong>Applied AI, apps, and content</strong>
             </div>
             <div>
               <span>Execution focus</span>
-              <strong>Cleaner handoffs and follow-up</strong>
+              <strong>Practical tools. Thoughtful stories.</strong>
             </div>
           </div>
         </div>
@@ -124,7 +124,7 @@ function About() {
   return (
     <section className="section split" id="about">
       <div>
-        <SectionHeading eyebrow="About Joel" title="Built from operations, not theory." />
+        <SectionHeading eyebrow="About Joel" title="An operator’s discipline. A creator’s perspective." />
       </div>
       <div className="stack">
         <div className="copy-card">
@@ -134,13 +134,13 @@ function About() {
             Management, and an MBA in Operations and Supply Chain Management.
           </p>
           <p>
-            I bring an operator&apos;s mindset to digital work. That means I do not just build websites that look good.
-            I build tools, pages, processes, and content systems that are meant to solve real business problems:
-            missed leads, unclear offers, outdated websites, weak follow-up, inconsistent content, and messy workflows.
+            I apply that experience to AI: understanding the problem, designing a useful workflow, and reviewing
+            the result. From app prototypes to content research and process documentation, I focus on making
+            AI a practical part of how work gets done.
           </p>
           <p>
-            Whether I&apos;m building a website, improving a process, or creating content, my focus is the same: make
-            the system clearer, stronger, and easier to execute.
+            As GI Joel, I create stories about character psychology, mythology, and human nature. Building apps
+            and creating content give me two ways to put ideas into practice, with curiosity, judgment, and a clear purpose.
           </p>
         </div>
         <div className="bring-grid">
@@ -185,8 +185,8 @@ function Services() {
     <section className="section band" id="services">
       <SectionHeading
         eyebrow="Services"
-        title="Practical digital and operational support."
-        subtitle="Practical digital and operational support for small businesses, creators, and service providers."
+        title="Three disciplines. One practical approach."
+        subtitle="AI expertise, creator experience, and operational discipline—applied to tools, workflows, and content."
       />
       <div className="services-grid">
         {services.map((service) => (
@@ -200,7 +200,7 @@ function Services() {
 function ProjectCard({ project }: { project: (typeof projects)[number] }) {
   return (
     <article className="project-card">
-      <div className="project-image">
+      <div className={`project-image ${project.category === 'Content Creation' ? 'project-image-banner' : ''}`}>
         <img src={project.previewImage} alt={`${project.title} preview`} loading="lazy" />
         <span>{project.category}</span>
       </div>
@@ -214,6 +214,7 @@ function ProjectCard({ project }: { project: (typeof projects)[number] }) {
           ))}
         </div>
         <div className="project-actions">
+          {project.actions.length === 0 ? <span className="coming-soon">Links coming soon</span> : null}
           {project.actions.map((action) => (
             <a key={action.label} href={action.url} target="_blank" rel="noreferrer">
               {action.label} <ExternalLink size={15} />
@@ -230,8 +231,8 @@ function Projects() {
     <section className="section" id="projects">
       <SectionHeading
         eyebrow="Featured Projects"
-        title="A growing collection of builds and digital experiments."
-        subtitle="Websites, apps, systems, and content projects will plug into these cards as they go live."
+        title="Apps I’m building. Stories I’m telling."
+        subtitle="A look at my work across AI tools, personal reflection, and social content."
       />
       <div className="projects-grid">
         {projects.map((project) => (
@@ -263,15 +264,14 @@ function Creator() {
   return (
     <section className="section band creator-section">
       <div className="creator-copy">
-        <SectionHeading eyebrow="Creator Experience" title="Creator Experience: thegijoel" />
+        <SectionHeading eyebrow="Creator Experience" title="GI Joel. Stories with something to say." />
         <p>
-          Under the creator brand thegijoel, Joel has built experience creating content around character analysis,
-          psychology, storytelling, and cultural commentary. This background gives him a practical understanding of
-          audience attention, hooks, scripting, short-form video, and content strategy.
+          I create short-form and long-form content that explores why characters and stories matter.
+          Through film, TV, anime, comics, and games, GI Joel connects psychology, mythology, and human experience.
         </p>
         <p>
-          That creator experience now supports his work with small businesses and personal brands that need clearer
-          messaging, stronger content, and a more consistent online presence.
+          I use AI to support research, explore ideas, refine scripts, and adapt content for social platforms.
+          My perspective and editorial judgment guide the final story.
         </p>
       </div>
       <div className="creator-panel">
@@ -281,26 +281,29 @@ function Creator() {
           ))}
         </div>
         <div className="social-proof">
-          <p>TikTok following: Add follower count</p>
-          <p>YouTube: Add channel link</p>
-          <p>Featured content: Add links later</p>
+          <p>Character psychology · Story analysis · Mythic storytelling</p>
+          <div className="creator-socials">
+            <a href={links.youtube} target="_blank" rel="noreferrer">YouTube <ExternalLink size={14} /></a>
+            <a href={links.instagram} target="_blank" rel="noreferrer">Instagram <ExternalLink size={14} /></a>
+            <a href={links.tiktok} target="_blank" rel="noreferrer">TikTok <ExternalLink size={14} /></a>
+          </div>
         </div>
       </div>
     </section>
   )
 }
 
-function Resume() {
+function MediaKit() {
   return (
-    <section className="section resume-strip">
+    <section className="section media-kit-strip">
       <div>
-        <p className="eyebrow">Professional Background</p>
-        <h2>Download the traditional resume.</h2>
-        <p>For a more traditional view of my work history, education, and certifications, download my resume below.</p>
+        <p className="eyebrow">Creator Partnerships</p>
+        <h2>Get to know GI Joel.</h2>
+        <p>Explore the GI Joel media kit for a closer look at the brand, audience, and content. For my professional background, connect with me on LinkedIn.</p>
       </div>
-      <div className="resume-actions">
-        <a className="button button-dark" href={links.resume} download>
-          <Download size={18} /> Download Resume
+      <div className="media-kit-actions">
+        <a className="button button-dark" href={links.mediaKit} download="GI-Joel-Media-Kit.png">
+          <Download size={18} /> Download Media Kit
         </a>
         <a className="button button-light" href={links.linkedin}>
           <UserRound size={18} /> Connect on LinkedIn
@@ -371,7 +374,7 @@ function ContactForm() {
         What do you need help with?
         <select name="need" required defaultValue="">
           <option value="" disabled>Select one</option>
-          <option>Website</option>
+          <option>App Building</option>
           <option>Process Improvement</option>
           <option>Social Media Marketing</option>
           <option>Content Creation</option>
@@ -388,7 +391,7 @@ function ContactForm() {
         <input name="link" type="url" placeholder="https://" />
       </label>
       <button className="button button-dark submit-button" type="submit" disabled={isSubmitting}>
-        {isSubmitting ? 'Sending...' : 'Request a Quote'}
+        {isSubmitting ? 'Sending...' : 'Let’s Connect'}
       </button>
       {submitted ? (
         <div className="confirmation" role="status">
@@ -411,7 +414,7 @@ function Contact() {
         <SectionHeading
           eyebrow="Start a Project"
           title="Bring the messy problem. I'll help structure the next move."
-          subtitle="Have a website, content idea, process problem, or business system that needs structure? Send the details and I'll take a look."
+          subtitle="Have an app idea, AI workflow, content collaboration, or operational challenge in mind? Let’s talk about it."
         />
       </div>
       <ContactForm />
@@ -424,7 +427,7 @@ function Footer() {
     <footer className="footer">
       <div>
         <h2>Joel Prentiss</h2>
-        <p>Websites. Systems. Content. Execution.</p>
+        <p>Applied AI. Apps. Content. Operations.</p>
         <p>Built by Joel Prentiss.</p>
       </div>
       <div className="footer-links">
@@ -448,9 +451,9 @@ export default function App() {
         <About />
         <Services />
         <Projects />
-        <Experience />
         <Creator />
-        <Resume />
+        <Experience />
+        <MediaKit />
         <Contact />
       </main>
       <Footer />
