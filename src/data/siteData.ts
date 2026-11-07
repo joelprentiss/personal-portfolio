@@ -89,12 +89,28 @@ export const projects = [
     ],
   },
   {
-    title: 'Face Your Dragon',
-    category: 'App / In Development',
-    previewImage: '/project-previews/face-your-dragon.webp',
-    description: 'An app designed to help people identify blind spots and improve their lives through guided reflection. Character archetypes, daily prompts, and journaling bring that experience to life. Currently in development.',
+    title: 'Trial Born',
+    category: 'App / Personal Growth',
+    previewImage: '/project-previews/trial-born.png',
+    description: 'A personal growth app built around character archetypes, guided reflection, daily prompts, and journaling. Trial Born helps people explore their patterns and turn self-awareness into a daily practice.',
     tools: ['Reflection', 'Journaling', 'AI-assisted development'],
-    actions: [],
+    actions: [{ label: 'Visit Trial Born', url: 'https://trialborn.app/' }],
+  },
+  {
+    title: 'Rephra',
+    category: 'App / Communication',
+    previewImage: '/project-previews/rephra.png',
+    description: 'An AI-assisted communication app for the messages that feel hard to send. Rephra turns what is on your mind into a clear written message that you can review, edit, and make your own.',
+    tools: ['AI-assisted writing', 'Communication', 'App development'],
+    actions: [{ label: 'Visit Rephra', url: 'https://rephra.app/' }],
+  },
+  {
+    title: 'Fairhaven Design',
+    category: 'Websites / Automation',
+    previewImage: '/project-previews/fairhaven-design.png',
+    description: 'Websites and practical automation for Texas estate sale and personal-property appraisal firms. Fairhaven brings together AI-ready site structure, lead capture, consultation booking, and review follow-up.',
+    tools: ['Web design', 'AI-ready websites', 'Lead capture', 'Automation'],
+    actions: [{ label: 'Visit Fairhaven Design', url: 'https://fairhavendesign.com/' }],
   },
 ]
 
