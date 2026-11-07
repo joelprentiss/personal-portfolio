@@ -1,0 +1,28 @@
+{
+  "status": 200,
+  "title": "Joel Prentiss | Applied AI, Apps, Content & Operations",
+  "h1": "OPERATOR.\nBUILDER.\nSTORYTELLER.",
+  "errors": [],
+  "assets": [
+    {
+      "path": "/favicon-16.png",
+      "status": 200,
+      "contentType": "image/png"
+    },
+    {
+      "path": "/brand/monogram.png",
+      "status": 200,
+      "contentType": "image/png"
+    },
+    {
+      "path": "/images/rephra.webp",
+      "status": 200,
+      "contentType": "image/webp"
+    },
+    {
+      "path": "/GI-Joel-Media-Kit-2026-10-17.pdf",
+      "status": 200,
+      "contentType": "application/pdf"
+    }
+  ]
+}

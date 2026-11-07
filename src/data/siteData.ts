@@ -7,141 +7,124 @@ export const links = {
   mediaKit: '/GI-Joel-Media-Kit-2026-10-17.pdf',
 }
 
-export const whatIBring = [
-  'Operations discipline',
-  'Practical problem-solving',
-  'Process improvement mindset',
-  'Applied AI and app building',
-  'Creator and audience experience',
-  'Front-line leadership experience',
-]
-
 export const services = [
   {
-    kicker: 'Applied AI',
-    title: 'AI that improves the work.',
-    description: 'I connect AI tools to real operational needs, turning repetitive work and scattered information into practical workflows.',
-    bullets: ['AI workflow design', 'Prompt development and iteration', 'Knowledge and process documentation', 'Human review and quality checks'],
-    cta: 'Talk AI & Operations',
+    name: 'Applied AI',
+    title: 'Put the tools to work.',
+    description: 'Connect AI to a real need. Build a useful workflow, test the output, and keep human judgment in the loop.',
+    details: ['Workflow design', 'Prompt development', 'Knowledge & process documentation', 'Human review & quality checks'],
   },
   {
-    kicker: 'App Building',
-    title: 'Ideas into useful apps.',
-    description: 'I use AI-assisted development to turn an idea into a working tool, with attention to the problem, the experience, and how people will use it.',
-    bullets: ['App concepts and prototypes', 'AI assistant experiences', 'Workflow tools', 'Testing and iteration'],
-    cta: 'Explore an App Idea',
+    name: 'App building',
+    title: 'Give an idea a working form.',
+    description: 'Use AI-assisted development to move from a problem to a prototype, with attention to how people actually use it.',
+    details: ['App concepts & prototypes', 'AI assistant experiences', 'Workflow tools', 'Testing & iteration'],
   },
   {
-    kicker: 'Creator Experience',
-    title: 'Better content. A clear voice.',
-    description: 'Hands-on experience as GI Joel informs how I use AI for research, ideation, and content refinement while keeping storytelling and personal voice at the center.',
-    bullets: ['Content research and ideation', 'Hooks and script development', 'Short-form and long-form storytelling', 'Repurposing content across social platforms'],
-    cta: 'Talk Content',
+    name: 'Content & storytelling',
+    title: 'Find the story worth telling.',
+    description: 'Bring research, audience understanding, and a distinct voice to short-form and long-form content.',
+    details: ['Research & ideation', 'Hooks & scriptwriting', 'Brand voice', 'Cross-platform content'],
   },
   {
-    kicker: 'Operations',
-    title: 'Make execution easier.',
-    description: 'Manufacturing leadership and an operations background shape my approach to clearer processes, stronger handoffs, and consistent execution.',
-    bullets: ['Workflow mapping and SOPs', 'Root cause analysis', 'Process improvement', 'Team training and handoffs'],
-    cta: 'Improve a Process',
+    name: 'Operations',
+    title: 'Make execution clearer.',
+    description: 'Draw on manufacturing leadership to understand the process, work through the root cause, and strengthen the handoff.',
+    details: ['Workflow mapping & SOPs', 'Root cause analysis', 'Process improvement', 'Team training & handoffs'],
   },
 ]
 
+// Release labels reflect the public sites inspected on November 7, 2026.
+// They describe availability, not customer traction or commercial results.
 export const projects = [
   {
-    title: 'AI Business Assistant Demo',
-    category: 'App / AI Tool',
-    previewImage: '/project-previews/ai-business-assistant.png',
-    description:
-      'A demo app concept that uses AI-assisted workflows to help small businesses generate operational, sales, marketing, and growth recommendations.',
-    tools: ['Next.js', 'OpenAI API', 'TypeScript', 'Tailwind'],
-    actions: [
-      {
-        label: 'Live Preview',
-        url: 'https://ironclad-ops-ai.joel-prentiss89.workers.dev/',
-      },
-      {
-        label: 'GitHub',
-        url: 'https://github.com/joelprentiss/ironclad-ops-ai',
-      },
-    ],
-  },
-  {
-    title: 'Personal Brand: GI Joel',
-    category: 'Content Creation',
-    previewImage: '/project-previews/gi-joel-youtube-banner.png',
-    description:
-      'My creator brand explores character psychology, mythology, and the meaning in stories. It is also where I bring together content strategy, AI-assisted creative workflows, and a distinct personal voice.',
-    tools: ['TikTok', 'YouTube', 'Scriptwriting', 'Short-form video'],
-    actions: [
-      {
-        label: 'Instagram',
-        url: 'https://www.instagram.com/thegijoel/',
-      },
-      {
-        label: 'TikTok',
-        url: 'https://www.tiktok.com/@thegijoel',
-      },
-      {
-        label: 'YouTube',
-        url: 'https://www.youtube.com/c/TheGIJoel',
-      },
-    ],
-  },
-  {
+    id: 'trial-born',
     title: 'Trial Born',
-    category: 'App / Personal Growth',
-    previewImage: '/project-previews/trial-born.png',
-    description: 'A personal growth app built around character archetypes, guided reflection, daily prompts, and journaling. Trial Born helps people explore their patterns and turn self-awareness into a daily practice.',
-    tools: ['Reflection', 'Journaling', 'AI-assisted development'],
-    actions: [{ label: 'Visit Trial Born', url: 'https://trialborn.app/' }],
+    category: 'Personal growth app',
+    status: 'Live web app',
+    statusType: 'live',
+    previewImage: '/images/trial-born.webp',
+    imageAlt: 'Trial Born artwork: a lone traveler facing a dragon, with the words A journal for the journey within',
+    imageWidth: 1024,
+    imageHeight: 500,
+    headline: 'Turn reflection into a daily practice.',
+    description: 'An app exploring character archetypes, guided reflection, daily prompts, and journaling. A way to connect the stories we relate to with the patterns in our own lives.',
+    contribution: 'App building, guided reflection, and AI-assisted development.',
+    note: 'Available in the browser. iPhone and Android apps are coming.',
+    actions: [{ label: 'Explore Trial Born', url: 'https://trialborn.app/' }],
   },
   {
+    id: 'rephra',
     title: 'Rephra',
-    category: 'App / Communication',
-    previewImage: '/project-previews/rephra.png',
-    description: 'An AI-assisted communication app for the messages that feel hard to send. Rephra turns what is on your mind into a clear written message that you can review, edit, and make your own.',
-    tools: ['AI-assisted writing', 'Communication', 'App development'],
+    category: 'AI-assisted communication',
+    status: 'In testing · Waitlist',
+    statusType: 'development',
+    previewImage: '/images/rephra.webp',
+    imageAlt: 'Rephra website showing an example of turning a difficult thought into a clear written message',
+    imageWidth: 1180,
+    imageHeight: 757,
+    headline: 'For the messages that are hard to send.',
+    description: 'Turn what’s on your mind into a clearer message. Review the suggestion, edit it, and keep the final say over your words.',
+    contribution: 'App development and AI-assisted writing workflows.',
+    note: 'Currently in testing; the site offers a waitlist for updates.',
     actions: [{ label: 'Visit Rephra', url: 'https://rephra.app/' }],
   },
   {
+    id: 'fairhaven',
     title: 'Fairhaven Design',
-    category: 'Websites / Automation',
-    previewImage: '/project-previews/fairhaven-design.png',
-    description: 'Websites and practical automation for Texas estate sale and personal-property appraisal firms. Fairhaven brings together AI-ready site structure, lead capture, consultation booking, and review follow-up.',
-    tools: ['Web design', 'AI-ready websites', 'Lead capture', 'Automation'],
-    actions: [{ label: 'Visit Fairhaven Design', url: 'https://fairhavendesign.com/' }],
+    category: 'Websites & automation',
+    status: 'Live site',
+    statusType: 'live',
+    previewImage: '/images/fairhaven-design.webp',
+    imageAlt: 'Fairhaven website introducing websites for Texas estate sale and appraisal firms',
+    imageWidth: 1165,
+    imageHeight: 747,
+    headline: 'A considered home for a local business.',
+    description: 'Websites and practical automation for Texas estate sale and personal-property appraisal firms, connecting clear site structure with lead capture, booking, and follow-up.',
+    contribution: 'Web design, AI-ready site structure, and automation.',
+    note: 'The public site includes three demonstration designs.',
+    actions: [{ label: 'Visit Fairhaven', url: 'https://fairhavendesign.com/' }],
+  },
+  {
+    id: 'ai-assistant',
+    title: 'AI Business Assistant',
+    category: 'Applied AI / Ironclad AI',
+    status: 'Interactive demo',
+    statusType: 'demo',
+    previewImage: '/images/ai-business-assistant.webp',
+    imageAlt: 'Ironclad AI demo with a missed-call and follow-up check for small businesses',
+    imageWidth: 1440,
+    imageHeight: 1000,
+    headline: 'From a messy process to a practical next step.',
+    description: 'A demo exploring how AI can turn a business’s missed-call and follow-up process into suggested actions and reusable message templates.',
+    contribution: 'AI workflow design and app development with Next.js, the OpenAI API, TypeScript, and Tailwind.',
+    note: 'An exploratory demo, not a client case study.',
+    actions: [
+      { label: 'Open the demo', url: 'https://ironclad-ops-ai.joel-prentiss89.workers.dev/' },
+      { label: 'View source', url: 'https://github.com/joelprentiss/ironclad-ops-ai' },
+    ],
   },
 ]
 
 export const experience = [
   {
-    title: 'Operations Leadership at Tesla',
-    description:
-      'Joel has experience in front-line manufacturing leadership at Tesla, supporting production teams, quality standards, process execution, training, escalations, and operational problem-solving in a fast-paced environment.',
+    label: 'Leadership',
+    title: 'Operations at Tesla',
+    description: 'Front-line manufacturing leadership supporting production teams, quality standards, training, escalations, and day-to-day problem-solving.',
   },
   {
-    title: 'U.S. Navy Veteran',
-    description:
-      "Joel's military background helped shape his practical approach to discipline, leadership, technical problem-solving, and performing under pressure.",
+    label: 'Service',
+    title: 'U.S. Navy veteran',
+    description: 'A foundation in discipline, technical problem-solving, teamwork, and performing under pressure.',
   },
   {
-    title: 'Business and Operations Education',
-    description:
-      'Joel holds a BBA in Project Management and an MBA in Operations and Supply Chain Management.',
+    label: 'Education',
+    title: 'Business & operations',
+    description: 'MBA in Operations and Supply Chain Management. BBA in Project Management.',
   },
   {
+    label: 'Continuous improvement',
     title: 'Six Sigma Green Belt',
-    description:
-      'Joel earned a Six Sigma Green Belt certification, supporting his focus on process improvement, quality, and operational efficiency.',
+    description: 'A process improvement certification supporting a practical focus on quality and operational efficiency.',
   },
-]
-
-export const creatorSkills = [
-  'Short-form video strategy',
-  'Scriptwriting',
-  'Audience psychology',
-  'Storytelling',
-  'Brand voice',
-  'Content systems',
 ]

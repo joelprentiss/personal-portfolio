@@ -1,0 +1,107 @@
+{
+  "runAt": "2026-11-07T17:15:54.406Z",
+  "base": "http://127.0.0.1:5173",
+  "results": [
+    {
+      "name": "Layout at 320×812",
+      "status": "pass",
+      "detail": "No horizontal overflow, all images decoded, one H1, all internal anchor targets exist."
+    },
+    {
+      "name": "Accessibility at 390",
+      "status": "pass",
+      "detail": "No axe WCAG A/AA violations; keyboard and motion checked separately."
+    },
+    {
+      "name": "Navigation at 390",
+      "status": "pass",
+      "detail": "All five navigation links land below the sticky header; mobile disclosure closes."
+    },
+    {
+      "name": "Layout at 390×844",
+      "status": "pass",
+      "detail": "No horizontal overflow, all images decoded, one H1, all internal anchor targets exist."
+    },
+    {
+      "name": "Accessibility at 768",
+      "status": "pass",
+      "detail": "No axe WCAG A/AA violations; keyboard and motion checked separately."
+    },
+    {
+      "name": "Layout at 768×1024",
+      "status": "pass",
+      "detail": "No horizontal overflow, all images decoded, one H1, all internal anchor targets exist."
+    },
+    {
+      "name": "Layout at 1024×900",
+      "status": "pass",
+      "detail": "No horizontal overflow, all images decoded, one H1, all internal anchor targets exist."
+    },
+    {
+      "name": "Accessibility at 1440",
+      "status": "pass",
+      "detail": "No axe WCAG A/AA violations; keyboard and motion checked separately."
+    },
+    {
+      "name": "Navigation at 1440",
+      "status": "pass",
+      "detail": "All five navigation links land below the sticky header; mobile disclosure closes."
+    },
+    {
+      "name": "Layout at 1440×1000",
+      "status": "pass",
+      "detail": "No horizontal overflow, all images decoded, one H1, all internal anchor targets exist."
+    },
+    {
+      "name": "Layout at 1920×1080",
+      "status": "pass",
+      "detail": "No horizontal overflow, all images decoded, one H1, all internal anchor targets exist."
+    },
+    {
+      "name": "Keyboard skip link",
+      "status": "pass",
+      "detail": "First Tab shows the focused skip link; Enter moves to main and the next Tab reaches the hero action."
+    },
+    {
+      "name": "Assets and links",
+      "status": "pass",
+      "detail": "PDF download succeeds with the existing filename; PNG logo and favicons return images; all project and social destinations are preserved."
+    },
+    {
+      "name": "Validation and failure recovery",
+      "status": "pass",
+      "detail": "Empty fields, malformed email, and a collapsed invalid optional URL are caught with focus and inline messages. Network failure retains the draft."
+    },
+    {
+      "name": "Pending and dispatched states",
+      "status": "pass",
+      "detail": "Duplicate submit blocked, controls disabled while pending, original POST and six payload keys preserved, form resets, and live confirmation accurately describes unverified delivery."
+    },
+    {
+      "name": "Timeout recovery",
+      "status": "pass",
+      "detail": "After 20 seconds the request aborts, draft stays intact, and the message distinguishes uncertain delivery."
+    },
+    {
+      "name": "Mobile keyboard and motion",
+      "status": "pass",
+      "detail": "Disclosure supports Enter, Tab, Escape with focus return, and outside click. Portrait parallax is disabled on mobile."
+    },
+    {
+      "name": "Motion and live reduced-motion change",
+      "status": "pass",
+      "detail": "Desktop portrait moves within a 36px range; offscreen sections reveal; changing preference immediately exposes all content and removes transforms and smooth scrolling."
+    },
+    {
+      "name": "Animation fallback",
+      "status": "pass",
+      "detail": "Content stays visible when IntersectionObserver is unavailable."
+    },
+    {
+      "name": "Browser runtime",
+      "status": "pass",
+      "detail": "No uncaught page errors throughout the checks."
+    }
+  ],
+  "runtimeErrors": []
+}

@@ -1,0 +1,86 @@
+{
+  "contract": "design-contract.md — local redesign of joelprentiss.com in the existing React/Vite/Cloudflare project; no deployment.",
+  "targetViewports": [
+    "390x844",
+    "768x1024",
+    "1440x1000"
+  ],
+  "accessibility": {
+    "status": "pass",
+    "evidence": "axe-core 4.14 scans report zero WCAG A/AA violations and zero incomplete checks at all three target viewports. Keyboard skip navigation, mobile disclosure, Escape focus return, visible focus, form error focus and live messages, and reduced-motion changes were exercised. Form fields scroll clear of the sticky header."
+  },
+  "responsive": {
+    "status": "pass",
+    "evidence": "Chromium checks at 320, 390, 768, 1024, 1440, and 1920px found no horizontal overflow, missing image loads, or missing anchor targets. All five main navigation anchors land below the sticky header at 390 and 1440px. Screenshots of the hero, work, capabilities, contact, and whole page were visually inspected."
+  },
+  "contentStates": {
+    "loading": {
+      "status": "pass",
+      "evidence": "Intercepted pending contact request shows Sending, announces progress, disables the fields and submit button, and suppresses duplicate submission."
+    },
+    "empty": {
+      "status": "pass",
+      "evidence": "Submitting empty fields produces three accessible inline errors and focuses name. Invalid email and URL are also rejected before a request; collapsed optional fields reopen if their URL is invalid."
+    },
+    "error": {
+      "status": "pass",
+      "evidence": "Intercepted network failure retains the draft and exposes retry and LinkedIn recovery. Simulated 20-second timeout retains inputs and states delivery is uncertain."
+    },
+    "partial": {
+      "status": "pass",
+      "evidence": "Four verified projects identify live browser app, testing/waitlist, live website, and interactive demo separately. Trial Born's mobile apps are described as coming. Project imagery comes from supplied assets or an actual browser capture."
+    },
+    "success": {
+      "status": "pass",
+      "evidence": "Intercepted successful dispatch resets inputs and announces a confirmation without claiming verified receipt. The original POST mode, endpoint, content type, and all six payload keys remain; no real inquiry was sent."
+    },
+    "permission": {
+      "status": "not-applicable",
+      "reason": "This public portfolio has no login, permissions prompt, or gated content. All form scenarios were intercepted locally and no publication was authorized or attempted."
+    }
+  },
+  "renderedEvidence": [
+    {
+      "viewport": "390x844",
+      "artifact": "desktop-390.png",
+      "observation": "Mobile layout: monogram and menu remain recognizable, headline fits, project images are uncropped, capabilities and credentials stack, creator art is legible, and the contact form uses full-width controls."
+    },
+    {
+      "viewport": "768x1024",
+      "artifact": "desktop-768.png",
+      "observation": "Tablet layout: two-column hero and secondary projects, full-width featured project, disclosure navigation, and readable experience and contact columns."
+    },
+    {
+      "viewport": "1440x1000",
+      "artifact": "desktop-1440.png",
+      "observation": "Desktop layout: large portrait and selective condensed typography, editorial project layouts, open capability rows, distinct olive creator section, and simplified contact."
+    }
+  ],
+  "validation": [
+    "npm run build passed",
+    "npm run lint passed",
+    "npm run test:portfolio: 20 checks passed",
+    "git diff --check passed",
+    "Local Cloudflare production preview returned 200 with correct image/PDF MIME types and no uncaught page errors"
+  ],
+  "supportingFiles": [
+    "checks.json",
+    "axe-390.json",
+    "axe-768.json",
+    "axe-1440.json",
+    "link-checks.json",
+    "production-preview.json",
+    "favicon-review.png",
+    "contact-validation.png",
+    "contact-error.png",
+    "contact-pending.png",
+    "contact-dispatched.png",
+    "mobile-menu.png"
+  ],
+  "limitations": [
+    "The existing no-cors Apps Script response cannot prove backend receipt; end-to-end live delivery was deliberately not tested.",
+    "LinkedIn returned 999 to automated requests; its existing URL was retained.",
+    "Browser tests used Chromium emulation, not physical mobile devices or a screen reader.",
+    "The initial direct generated-config Wrangler preview encountered a watch loop; the existing source config with --assets dist and persistence outside dist served the production build successfully. Deployment settings were not changed."
+  ]
+}

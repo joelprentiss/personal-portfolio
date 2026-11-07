@@ -1,73 +1,70 @@
-# React + TypeScript + Vite
+# Joel Prentiss portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React 19 + TypeScript portfolio built with Vite and served as static assets by Cloudflare Workers. The redesign is local; deployment configuration is unchanged.
 
-Currently, two official plugins are available:
+## Local development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Use Node.js 22 or newer (required by the existing Cloudflare tooling).
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```sh
+npm install
+npm run dev -- --host 127.0.0.1
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The usual local address is http://127.0.0.1:5173.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Validation
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+With the local server running:
+
+```sh
+npm run lint
+npm run build
+npm run test:portfolio
 ```
+
+The browser checks use the existing Playwright dependency and the development-only axe-core accessibility checker. If Chromium is unavailable, run `npx playwright install chromium`. To check a different local port, set `PORTFOLIO_URL`. The runner rejects non-local hosts and intercepts every Google Apps Script request, so it never sends a real inquiry.
+
+Checks cover six viewport widths, image loading, anchors and sticky-header offsets, keyboard navigation, mobile navigation, WCAG automated checks, the PDF download, all preserved link destinations, form validation, network errors, pending/duplicate submissions, dispatch, timeout, reduced motion, and animation fallback. Screenshots and machine-readable results are in `artifacts/redesign/`.
+
+`npm run preview` is the existing build-and-Wrangler command. For the production smoke check, the following explicit local command served the build successfully and kept preview state outside the watched asset directory:
+
+```sh
+npx wrangler dev --config wrangler.jsonc --assets dist --persist-to node_modules/.cache/portfolio-worker --port 8787 --local
+```
+
+The existing `npm run deploy` command publishes the site; it is not part of validation.
+
+## Editing content and assets
+
+- `src/data/siteData.ts`: project descriptions, current release labels, credentials, capabilities, and external links.
+- `src/App.tsx`: page composition and navigation.
+- `src/components/ContactForm.tsx`: contact behavior and the existing Apps Script integration.
+- `src/hooks/usePortfolioMotion.ts`: progressive scroll reveals and desktop portrait parallax.
+- `src/index.css`: design tokens, responsive layouts, typography, and motion preferences.
+
+The supplied `logo.png` brand sheet is retained. Its large circular monogram was extracted at x=576, y=46, width=384, height=384 without tracing, recoloring, or changing its proportions. PNG assets cover 16/32/48px favicons, the 44–48 CSS pixel header mark, and the 180px touch icon. The dark original background is retained; no transparent version was needed. See `public/brand/README.md`.
+
+Original portrait and project assets remain in place. `public/images/` contains optimized WebP derivatives. The AI demo image is an actual November 7, 2026 browser capture of its linked site; the Trial Born image is existing brand artwork, not an invented app screenshot. Local fonts are retained. No new production or animation dependency was added.
+
+## Contact integration
+
+The endpoint, POST method, `no-cors` mode, `text/plain;charset=utf-8` content type, and the six JSON keys (`name`, `email`, `projectName`, `need`, `details`, `link`) remain intact. Name, email, and message are required. Topic and extra context are optional.
+
+A no-cors response is opaque: the client cannot confirm receipt or see a server-side failure. The confirmation describes dispatch instead of claiming successful delivery. A future verified receipt requires a backend change (for example, a same-origin endpoint that validates and relays the request and returns a real result). That backend change is outside this redesign. No live delivery was tested.
+
+## Motion
+
+Only the portrait layer moves with scroll, by at most 36px across its range. The hook coalesces updates with requestAnimationFrame, uses a passive scroll listener, and avoids React updates during scrolling. It disables parallax on small/coarse-pointer screens and skips nonessential effects on low-concurrency devices. Reveals are observed once and animate only opacity and transform.
+
+Reduced motion immediately removes transforms, reveals all content, and disables smooth scrolling and transitions. Text and controls stay fixed. The default content is visible if the observer is unavailable. There is no scroll hijacking.
+
+## Content to strengthen next
+
+- Short project case studies: the original problem, Joel’s exact role, key decisions, and concrete outcomes supported by evidence.
+- Current in-app screenshots for Trial Born and Rephra when appropriate for their release stages.
+- A few representative GI Joel videos or partnership examples, with permission and verified results.
+- An original vector of the supplied monogram, if available, for future large-format use.
+- Updates to release labels when product availability changes.
+
+The public project sites and social links were inspected on November 7, 2026. LinkedIn rejects automated requests, so its existing URL was preserved without claiming a successful profile inspection.

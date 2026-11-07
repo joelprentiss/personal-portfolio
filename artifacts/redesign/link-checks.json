@@ -1,0 +1,52 @@
+[
+  {
+    "url": "https://trialborn.app/",
+    "status": 200,
+    "finalUrl": "https://trialborn.app/"
+  },
+  {
+    "url": "https://rephra.app/",
+    "status": 200,
+    "finalUrl": "https://rephra.app/"
+  },
+  {
+    "url": "https://fairhavendesign.com/",
+    "status": 200,
+    "finalUrl": "https://fairhavendesign.com/"
+  },
+  {
+    "url": "https://ironclad-ops-ai.joel-prentiss89.workers.dev/",
+    "status": 200,
+    "finalUrl": "https://ironclad-ops-ai.joel-prentiss89.workers.dev/"
+  },
+  {
+    "url": "https://github.com/joelprentiss/ironclad-ops-ai",
+    "status": 200,
+    "finalUrl": "https://github.com/joelprentiss/ironclad-ops-ai"
+  },
+  {
+    "url": "https://github.com/joelprentiss",
+    "status": 200,
+    "finalUrl": "https://github.com/joelprentiss"
+  },
+  {
+    "url": "https://www.linkedin.com/in/joel-prentiss/",
+    "status": 999,
+    "finalUrl": "https://www.linkedin.com/in/joel-prentiss"
+  },
+  {
+    "url": "https://www.instagram.com/thegijoel/",
+    "status": 200,
+    "finalUrl": "https://www.instagram.com/thegijoel/"
+  },
+  {
+    "url": "https://tiktok.com/@thegijoel",
+    "status": 200,
+    "finalUrl": "https://www.tiktok.com/@thegijoel"
+  },
+  {
+    "url": "https://www.youtube.com/c/TheGIJoel",
+    "status": 200,
+    "finalUrl": "https://www.youtube.com/c/TheGIJoel"
+  }
+]
