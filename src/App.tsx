@@ -302,7 +302,7 @@ function MediaKit() {
         <p>Explore the GI Joel media kit for a closer look at the brand, audience, and content. For my professional background, connect with me on LinkedIn.</p>
       </div>
       <div className="media-kit-actions">
-        <a className="button button-dark" href={links.mediaKit} download="GI-Joel-Media-Kit.png">
+        <a className="button button-dark" href={links.mediaKit} download="GI-Joel-Media-Kit-2026-10-17.pdf">
           <Download size={18} /> Download Media Kit
         </a>
         <a className="button button-light" href={links.linkedin}>

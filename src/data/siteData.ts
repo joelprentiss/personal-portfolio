@@ -4,7 +4,7 @@ export const links = {
   instagram: 'https://www.instagram.com/thegijoel/',
   tiktok: 'https://tiktok.com/@thegijoel',
   youtube: 'https://www.youtube.com/c/TheGIJoel',
-  mediaKit: '/GI-Joel-Media-Kit.png',
+  mediaKit: '/GI-Joel-Media-Kit-2026-10-17.pdf',
 }
 
 export const whatIBring = [
