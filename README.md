@@ -35,6 +35,16 @@ npx wrangler dev --config wrangler.jsonc --assets dist --persist-to node_modules
 
 The existing `npm run deploy` command publishes the site; it is not part of validation.
 
+## Estate-business guides
+
+The `/guides` index and three articles are ordinary HTML in `public/guides.html` and `public/guides/*.html`, with shared `public/guides/guides.css`. Vite copies them into the build unchanged. They contain the entire article and metadata without React or JavaScript. Edit the HTML directly; no content generator, CMS, or additional production package is required.
+
+Cloudflare's existing default HTML handling serves the `.html` files at their extensionless canonical URLs and redirects `.html` and trailing-slash variants. Keep article links, self-canonicals, Open Graph URLs, Article data, and `public/sitemap.xml` aligned when changing a URL. Update visible and structured dates only when the content changes. Preserve `public/robots.txt`.
+
+The blank CSV worksheets contain no client data. The website self-assessment uses native checkboxes and print styles; it does not save responses or send data. Sources are linked on each article. The writing distinguishes Joel's role as a builder from the services of appraisers and liquidators.
+
+Run `npm run test:guides` against the production-style local Wrangler preview on port 8787 (`GUIDES_URL` can override the local URL). It checks full HTML, metadata, structured data, URL variants, local links, downloads, sitemap and robots, no-JavaScript rendering, keyboard use, three article viewport widths, and axe accessibility checks. It also checks the homepage Guides link at narrow and intermediate widths. Screenshots and results are written to `artifacts/guides/` and are review evidence, not site assets. The existing `npm run test:portfolio` covers broader homepage behavior.
+
 ## Editing content and assets
 
 - `src/data/siteData.ts`: project descriptions, current release labels, credentials, capabilities, and external links.

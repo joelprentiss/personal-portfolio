@@ -10,6 +10,7 @@ const navItems = [
   { label: 'Capabilities', href: '#services' },
   { label: 'About', href: '#about' },
   { label: 'GI Joel', href: '#creator' },
+  { label: 'Guides', href: '/guides' },
 ]
 
 function Navbar() {
@@ -213,7 +214,7 @@ function Footer() {
     <footer className="site-footer">
       <div className="wrap footer-top">
         <a className="brand" href="#home"><img src="/brand/monogram.png" alt="" width="48" height="48" /><span>Joel Prentiss<span className="brand-caption">A practical mind. A creative streak.</span></span><span className="sr-only">Back to top</span></a>
-        <div className="footer-links"><a href={links.github} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={15} /></a><a href={links.linkedin} target="_blank" rel="noreferrer">LinkedIn <ArrowUpRight size={15} /></a><a href="#contact">Get in touch <ArrowUpRight size={15} /></a></div>
+        <div className="footer-links"><a href="/guides">Business guides <ArrowUpRight size={15} /></a><a href={links.github} target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={15} /></a><a href={links.linkedin} target="_blank" rel="noreferrer">LinkedIn <ArrowUpRight size={15} /></a><a href="#contact">Get in touch <ArrowUpRight size={15} /></a></div>
       </div>
       <div className="wrap footer-bottom"><span>© {new Date().getFullYear()} Joel Prentiss</span><span>Built with curiosity. Made to be useful.</span><a href="#home">Back to top ↑</a></div>
     </footer>
