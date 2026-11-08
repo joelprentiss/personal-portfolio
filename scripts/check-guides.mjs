@@ -7,7 +7,7 @@ import axe from 'axe-core'
 const base = process.env.GUIDES_URL || 'http://127.0.0.1:8787'
 assert(['localhost', '127.0.0.1'].includes(new URL(base).hostname), 'Use a local preview.')
 const origin = 'https://joelprentiss.com'
-const slugs = ['grow-estate-sale-business-texas', 'estate-sale-referral-partners', 'estate-sale-website-checklist']
+const slugs = ['grow-estate-sale-business-texas', 'estate-sale-referral-partners', 'estate-sale-website-checklist', 'qualify-estate-sale-leads', 'estate-sale-job-cost-worksheet', 'estate-sale-reviews-without-review-gating', 'estate-sale-commissions-and-fees', 'estate-sale-payout-statement']
 const paths = ['/guides', ...slugs.map((slug) => '/guides/' + slug)]
 const results = []
 const directory = 'artifacts/guides'
@@ -66,12 +66,22 @@ try {
       assert.equal(structured.headline, (await page.locator('h1').textContent()).trim())
       assert.equal(structured.datePublished, await page.locator('time').getAttribute('datetime'))
       assert.match(article, /not an estate liquidator or appraiser/)
-      for (const other of paths.filter((path) => path !== '/guides' && path !== route)) assert(await page.locator('a[href="' + other + '"]').count() > 0)
+      const related = await page.locator('.related a').evaluateAll((links) => links.map((link) => link.getAttribute('href')))
+      assert(related.length >= 2, 'Each guide has relevant next steps')
+      assert(related.every((href) => paths.includes(href) && href !== route), 'Related articles exist and do not link to themselves')
+      assert(await page.locator('.sources a').count() >= 2, 'Sources are linked')
+      if (slugs.indexOf(route.split('/').pop()) >= 3) {
+        assert.equal(await page.locator('meta[name="twitter:title"]').getAttribute('content'), structured.headline)
+        assert.equal(await page.locator('meta[name="twitter:description"]').getAttribute('content'), structured.description)
+      }
+    } else {
+      for (const slug of slugs) assert.equal(await page.locator('.guide-row a[href="/guides/' + slug + '"]').count(), 1)
     }
     for (const width of [320, 390, 1440]) {
       await page.setViewportSize({ width, height: 900 })
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, 'No page overflow: ' + route + ' at ' + width)
       assert.equal(await page.locator('img').evaluateAll((images) => images.every((image) => image.complete && image.naturalWidth > 0)), true)
+      assert.equal(await page.locator('.financial-table .amount').evaluateAll((cells) => cells.every((cell) => getComputedStyle(cell).whiteSpace === 'nowrap')), true, 'Financial amounts remain on one line')
       if (width !== 320) {
         await page.addScriptTag({ content: axe.source })
         const audit = await page.evaluate(() => window.axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'] } }))
@@ -102,13 +112,63 @@ try {
   const xml = await sitemap.text()
   assert.match(sitemap.headers()['content-type'], /xml/)
   for (const route of ['/', ...paths]) assert(xml.includes('<loc>' + origin + route + '</loc>'))
-  assert.equal((xml.match(/<loc>/g) || []).length, 5)
+  assert.equal((xml.match(/<loc>/g) || []).length, paths.length + 1)
   const robots = await page.request.get(base + '/robots.txt')
   const robotText = await robots.text()
   assert.match(robotText, /User-agent: Googlebot/)
   assert.match(robotText, /Allow: \//)
   assert.match(robotText, /Sitemap: https:\/\/joelprentiss.com\/sitemap.xml/)
-  pass('Local links, downloads, and crawl files', 'All local destinations resolve; two CSVs; five sitemap URLs; existing robots rules preserved')
+  assert.equal([...internal].filter((href) => href.endsWith('.csv')).length, 6)
+  pass('Local links, downloads, and crawl files', 'All local destinations resolve; six CSVs; ten sitemap URLs; existing robots rules preserved')
+
+  // Independently reconcile the published worked examples, including visible numbers.
+  const money = (text) => Number(text.replaceAll('−', '-').replace(/[$,\s]/g, ''))
+  await page.goto(base + '/guides/estate-sale-job-cost-worksheet')
+  const costs = await page.locator('#job-cost-example tr[data-cost] td:last-child').allTextContents()
+  const total = costs.map(money).reduce((sum, cost) => sum + cost, 0)
+  assert.equal(total, 4200)
+  assert.equal(money(await page.locator('[data-total-cost]').innerText()), total)
+  for (const row of await page.locator('#job-scenarios tbody tr').all()) {
+    const numbers = (await row.locator('th, td').allTextContents()).map(money)
+    const [sales] = numbers
+    const commission = Math.max(sales * 0.35, 3000)
+    assert.deepEqual(numbers, [sales, commission, commission + 500, commission + 500 - total])
+  }
+  assert.equal((total + 500 - 500) / 0.35, 12000)
+  await page.goto(base + '/guides/estate-sale-commissions-and-fees')
+  for (const row of await page.locator('#proposal-scenarios tbody tr').all()) {
+    const numbers = (await row.locator('th, td').allTextContents()).map(money)
+    const [sales] = numbers
+    const aFees = Math.max(sales * 0.3, 3500) + 1200 + 400
+    const bFees = Math.max(sales * 0.4, 4200)
+    assert.deepEqual(numbers, [sales, aFees, sales - aFees, bFees, sales - bFees])
+  }
+  await page.goto(base + '/guides/estate-sale-payout-statement')
+  const payout = {}
+  for (const row of await page.locator('#payout-example tr[data-line]').all()) {
+    payout[await row.getAttribute('data-line')] = Math.abs(money(await row.locator('td:last-child').innerText()))
+  }
+  assert.equal(payout.receipts, 12800 + 960)
+  assert.equal(payout.refunds, 800 + 60)
+  assert.equal(payout.netReceipts, payout.receipts - payout.refunds)
+  assert.equal(payout.tax, 960 - 60)
+  assert.equal(payout.basis, payout.netReceipts - payout.tax)
+  assert.equal(payout.commission, payout.basis * 0.35)
+  assert.equal(payout.sellerTotal, payout.basis - payout.commission - payout.expenses)
+  assert.equal(payout.due, payout.sellerTotal - payout.previous)
+  assert.equal(payout.due, 4150)
+  pass('Worked financial examples', 'Visible job costs, minimum commissions, proposal net proceeds, and payout reconciliation match independent calculations')
+
+  await page.goto(base + '/guides/estate-sale-reviews-without-review-gating')
+  assert.equal(await page.getByRole('checkbox').count(), 6)
+  await page.getByRole('checkbox').first().focus()
+  await page.keyboard.press('Space')
+  assert(await page.getByRole('checkbox').first().isChecked())
+  assert.equal(await page.locator('a[href="https://support.google.com/contributionpolicy/answer/7400114"]').count(), 2)
+  await page.emulateMedia({ media: 'print' })
+  assert(await page.locator('.checklist').isVisible())
+  await page.emulateMedia({ media: 'screen' })
+  pass('Review workflow audit', 'Six labeled native checkboxes work by keyboard and print; current official review policy is linked')
 
   await page.goto(base + paths[3])
   const boxes = page.getByRole('checkbox')
@@ -130,7 +190,7 @@ try {
     if (route !== '/guides') assert.equal(await plain.locator('#about-author').isVisible(), true)
   }
   await noJs.close()
-  pass('JavaScript disabled', 'All four pages display their complete content without JavaScript')
+  pass('JavaScript disabled', 'The hub and all eight guides display their complete content without JavaScript')
 
   for (const width of [320, 900, 1024, 1440]) {
     await page.setViewportSize({ width, height: 900 })

@@ -53,6 +53,8 @@ caption { text-align: left; font-weight: 600; padding-bottom: 12px; }
 th, td { text-align: left; vertical-align: top; padding: 14px 12px; border-bottom: 1px solid var(--line); }
 th { background: #e7e2d4; font-weight: 600; }
 td:first-child { font-weight: 500; }
+.financial-table th { overflow-wrap: normal; }
+.financial-table .amount { white-space: nowrap; font-variant-numeric: tabular-nums; }
 .download { display: inline-flex; align-items: center; min-height: 44px; font-size: 15px; font-weight: 600; }
 .checklist { border: 0; padding: 0; margin: 24px 0; }
 .checklist legend { font-weight: 600; padding: 0; margin-bottom: 16px; }
