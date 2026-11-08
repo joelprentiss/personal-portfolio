@@ -7,7 +7,10 @@ import axe from 'axe-core'
 const base = process.env.GUIDES_URL || 'http://127.0.0.1:8787'
 assert(['localhost', '127.0.0.1'].includes(new URL(base).hostname), 'Use a local preview.')
 const origin = 'https://joelprentiss.com'
-const slugs = ['grow-estate-sale-business-texas', 'estate-sale-referral-partners', 'estate-sale-website-checklist', 'qualify-estate-sale-leads', 'estate-sale-job-cost-worksheet', 'estate-sale-reviews-without-review-gating', 'estate-sale-commissions-and-fees', 'estate-sale-payout-statement']
+const slugs = [
+  'grow-estate-sale-business-texas', 'estate-sale-referral-partners', 'estate-sale-website-checklist', 'qualify-estate-sale-leads', 'estate-sale-job-cost-worksheet', 'estate-sale-reviews-without-review-gating', 'estate-sale-commissions-and-fees', 'estate-sale-payout-statement',
+  'efficient-estate-sale-business-lean-playbook', 'reduce-estate-sale-setup-time', 'estate-sale-photography-workflow', 'estate-sale-staffing-workload', 'estate-sale-checkout-flow', 'estate-sale-inventory-systems', 'estate-sale-crew-5s-kit', 'estate-sale-pricing-research', 'estate-sale-readiness-checklist', 'train-estate-sale-staff', 'schedule-multiple-estate-sales', 'estate-sale-floor-plan', 'estate-sale-change-control', 'estate-sale-pricing-discount-errors', 'estate-sale-pickup-system', 'estate-sale-leftovers-plan', 'estate-sale-kpis', 'estate-sale-root-cause-analysis', 'choose-estate-sale-software', 'estate-sale-process-pilot',
+]
 const paths = ['/guides', ...slugs.map((slug) => '/guides/' + slug)]
 const results = []
 const directory = 'artifacts/guides'
@@ -58,7 +61,8 @@ try {
 
     if (route !== '/guides') {
       const article = await page.locator('.article-body').innerText()
-      assert(article.split(/\s+/).length > 1000, 'Full article text is present')
+      const articleIndex = slugs.indexOf(route.split('/').pop())
+      assert(article.split(/\s+/).length > (articleIndex < 8 ? 1000 : 800), 'Full substantive article text is present')
       assert.match(html, /<section id=/)
       const structured = JSON.parse(await page.locator('script[type="application/ld+json"]').textContent())
       assert.equal(structured.mainEntityOfPage, origin + route)
@@ -73,6 +77,11 @@ try {
       if (slugs.indexOf(route.split('/').pop()) >= 3) {
         assert.equal(await page.locator('meta[name="twitter:title"]').getAttribute('content'), structured.headline)
         assert.equal(await page.locator('meta[name="twitter:description"]').getAttribute('content'), structured.description)
+      }
+      if (articleIndex >= 8) {
+        assert.match(await page.locator('.series-nav').innerText(), new RegExp('Part ' + (articleIndex - 7) + ' of 20'))
+        assert(article.includes('proposed workflows'), 'Series applications are labeled as proposals')
+        if (articleIndex > 8) assert.equal(await page.locator('a.download').count(), 1, 'Focused guide includes a worksheet')
       }
     } else {
       for (const slug of slugs) assert.equal(await page.locator('.guide-row a[href="/guides/' + slug + '"]').count(), 1)
@@ -118,8 +127,49 @@ try {
   assert.match(robotText, /User-agent: Googlebot/)
   assert.match(robotText, /Allow: \//)
   assert.match(robotText, /Sitemap: https:\/\/joelprentiss.com\/sitemap.xml/)
-  assert.equal([...internal].filter((href) => href.endsWith('.csv')).length, 6)
-  pass('Local links, downloads, and crawl files', 'All local destinations resolve; six CSVs; ten sitemap URLs; existing robots rules preserved')
+  assert.equal([...internal].filter((href) => href.endsWith('.csv')).length, 25)
+  pass('Local links, downloads, and crawl files', 'All local destinations resolve; 25 CSVs; 30 sitemap URLs; existing robots rules preserved')
+
+  await page.goto(base + '/guides/efficient-estate-sale-business-lean-playbook')
+  assert.equal(await page.locator('#series-guide-list a').count(), 19)
+  for (const slug of slugs.slice(9)) assert.equal(await page.locator('#series-guide-list a[href="/guides/' + slug + '"]').count(), 1)
+  await page.goto(base + '/guides/estate-sale-checkout-flow')
+  assert.equal(await page.locator('.workflow ol > li').count(), 5)
+  await page.goto(base + '/guides/estate-sale-floor-plan')
+  assert.equal(await page.locator('.floor-grid > div').count(), 9)
+  await page.goto(base + '/guides/estate-sale-readiness-checklist')
+  assert.equal(await page.getByRole('checkbox').count(), 10)
+  await page.getByRole('checkbox').first().focus()
+  await page.keyboard.press('Space')
+  assert(await page.getByRole('checkbox').first().isChecked())
+  await page.emulateMedia({ media: 'print' })
+  assert(await page.locator('.checklist').isVisible())
+  await page.emulateMedia({ media: 'screen' })
+  pass('Operations series tools', 'All 19 focused guides are linked from the pillar; flow diagram, floor schematic, and printable readiness checks render')
+
+  const numericCells = async (selector) => (await page.locator(selector).allTextContents()).map((text) => Number(text.match(/-?[\d.]+/)?.[0]))
+  await page.goto(base + '/guides/estate-sale-staffing-workload')
+  assert.deepEqual(await numericCells('#staffing-example tbody td:last-child'), [24, 5, 20, 4])
+  assert.equal(4 * (6 - 1), 20)
+  assert.equal(24 - 20, 4)
+  await page.goto(base + '/guides/schedule-multiple-estate-sales')
+  assert.deepEqual(await numericCells('#shared-skill-example tbody td:nth-child(2)'), [12, 10, 22, 18, 4])
+  assert.equal(12 + 10 - 18, 4)
+  await page.goto(base + '/guides/estate-sale-pricing-discount-errors')
+  assert.deepEqual(await numericCells('#markdown-example tbody td:last-child'), [80 * 0.75, 80 * 0.5, 60 * 0.5])
+  await page.goto(base + '/guides/estate-sale-kpis')
+  assert.deepEqual(await numericCells('#kpi-example tbody td:nth-child(2)'), [40, 2, 3, 5])
+  assert.equal(2 / 40 * 100, 5)
+  await page.goto(base + '/guides/estate-sale-root-cause-analysis')
+  const counts = await numericCells('#pareto-example tbody td:nth-child(2)')
+  const shares = await numericCells('#pareto-example tbody td:nth-child(3)')
+  const cumulative = await numericCells('#pareto-example tbody td:nth-child(4)')
+  const sum = counts.reduce((a,b) => a+b,0)
+  assert.equal(sum, 20)
+  assert.deepEqual(shares, counts.map((n) => n / sum * 100))
+  let running = 0
+  assert.deepEqual(cumulative, shares.map((n) => running += n))
+  pass('Operations example arithmetic', 'Staffing, shared-skill capacity, markdown bases, KPI denominators, and Pareto percentages reconcile')
 
   // Independently reconcile the published worked examples, including visible numbers.
   const money = (text) => Number(text.replaceAll('−', '-').replace(/[$,\s]/g, ''))
@@ -190,7 +240,7 @@ try {
     if (route !== '/guides') assert.equal(await plain.locator('#about-author').isVisible(), true)
   }
   await noJs.close()
-  pass('JavaScript disabled', 'The hub and all eight guides display their complete content without JavaScript')
+  pass('JavaScript disabled', 'The hub and all 28 guides display their complete content without JavaScript')
 
   for (const width of [320, 900, 1024, 1440]) {
     await page.setViewportSize({ width, height: 900 })
